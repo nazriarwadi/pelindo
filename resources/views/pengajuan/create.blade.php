@@ -102,9 +102,9 @@
                             </div>
 
                             {{-- Tombol Aksi --}}
-                            <div class="flex justify-end mt-4">
+                            <div class="flex justify-end gap-4 mt-4">
                                 <a href="{{ route('pengajuan.index') }}"
-                                    class="inline-block px-6 py-3 mr-3 font-bold text-center uppercase align-middle transition-all bg-gray-200 rounded-lg cursor-pointer leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs">
+                                    class="inline-block px-6 py-3 font-bold text-center uppercase align-middle transition-all bg-gray-200 rounded-lg cursor-pointer leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs">
                                     Batal
                                 </a>
                                 <button type="submit"

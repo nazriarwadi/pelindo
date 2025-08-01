@@ -5,7 +5,7 @@
 @section('content') {{-- Konten yang spesifik untuk halaman register --}}
     <section class="min-h-screen">
         <div class="bg-top relative flex items-start pt-12 pb-56 m-4 overflow-hidden bg-cover min-h-50-screen rounded-xl"
-            style="background-image: url('{{ asset('assets/img/logo-ct.png') }}');">
+            style="background-image: url('{{ asset('assets/img/registrasi.png') }}');">
             <span
                 class="absolute top-0 left-0 w-full h-full bg-center bg-cover bg-gradient-to-tl from-zinc-800 to-zinc-700 opacity-60"></span>
             <div class="container z-10">

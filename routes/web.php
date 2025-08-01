@@ -1,20 +1,18 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CompleteController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PengajuanController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PermohonanController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Di sini Anda dapat mendaftarkan rute web untuk aplikasi Anda.
-| Rute-rute ini dimuat oleh RouteServiceProvider dan semuanya akan
-| ditugaskan ke grup middleware "web".
-|
 */
 
 // == HALAMAN UTAMA ==
@@ -42,28 +40,27 @@ Route::middleware('guest')->group(function () {
 // Semua rute di dalam grup ini hanya bisa diakses setelah pengguna login.
 Route::middleware(['auth'])->group(function () {
 
-    // Rute Logout
+    // Rute Umum (untuk semua role yang sudah login)
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-    // Rute Dashboard
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     /*
     |--------------------------------------------------------------------------
-    | Rute Aplikasi Utama
+    | Rute Berdasarkan Role Pengguna
     |--------------------------------------------------------------------------
     */
 
-    // Rute untuk CRUD "Buat Pengajuan"
-    // Hanya bisa diakses oleh pengguna dengan role 'pelindo_pakning'.
-    Route::resource('pengajuan', PengajuanController::class)
-        ->middleware('role:pelindo_pakning');
+    // Rute HANYA untuk role 'pelindo_pakning'
+    Route::middleware('role:pelindo_pakning')->group(function () {
+        Route::resource('pengajuan', PengajuanController::class);
+    });
 
-    // Anda bisa menambahkan rute lain yang memerlukan login di sini.
-    // Contoh:
-    // Route::resource('permohonan', PermohonanController::class)
-    //      ->middleware('role:pelindo_dumai');
+    // Rute HANYA untuk role 'pelindo_dumai'
+    Route::middleware('role:pelindo_dumai')->group(function () {
+        Route::get('/permohonan', [PermohonanController::class, 'index'])->name('permohonan.index');
+        Route::get('/permohonan/{permohonan}', [PermohonanController::class, 'show'])->name('permohonan.show');
+        Route::patch('/permohonan/{permohonan}/status', [PermohonanController::class, 'updateStatus'])->name('permohonan.updateStatus');
+    });
 
+    Route::get('/complete', [CompleteController::class, 'index'])->name('complete.index');
 });

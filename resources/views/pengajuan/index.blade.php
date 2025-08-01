@@ -27,7 +27,8 @@
                             x-transition:leave-end="opacity-0" class="px-6 pt-4">
                             <div class="relative w-full p-4 text-white bg-gradient-to-tl from-green-600 to-lime-400 rounded-xl"
                                 role="alert">
-                                {{ session('success') }}
+                                <span class="font-bold">Sukses!</span>
+                                <span class="block sm:inline">{{ session('success') }}</span>
                             </div>
                         </div>
                     @endif

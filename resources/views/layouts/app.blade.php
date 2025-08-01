@@ -28,13 +28,13 @@
     <aside
         class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto antialiased transition-transform duration-200 -translate-x-full bg-white border-0 shadow-xl dark:shadow-none dark:bg-slate-850 max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0"
         aria-expanded="false">
-        <div class="h-19">
+        <div class="h-25">
             <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times dark:text-white text-slate-400 xl:hidden"
                 sidenav-close></i>
             <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap dark:text-white text-slate-700"
                 href="{{ route('dashboard') }}">
                 <img src="{{ asset('assets/img/logo-ct.png') }}"
-                    class="hidden h-full max-w-full transition-all duration-200 dark:inline ease-nav-brand max-h-8"
+                    class="inline-block h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8"
                     alt="main_logo" />
                 <span class="ml-1 font-semibold transition-all duration-200 ease-nav-brand">Pelindo</span>
             </a>
@@ -77,9 +77,8 @@
                     {{-- Menu HANYA untuk role 'pelindo_dumai' --}}
                     @if (Auth::user()->role == 'pelindo_dumai')
                         <li class="mt-0.5 w-full">
-                            {{-- Ganti 'permohonan.*' dengan nama rute Anda nanti --}}
-                            <a class="py-2.7 {{-- request()->routeIs('permohonan.*') ? 'bg-blue-500/13 font-semibold text-slate-700' : '' --}} dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 transition-colors"
-                                href="#">
+                            <a class="py-2.7 {{ request()->routeIs('permohonan.*') ? 'bg-blue-500/13 font-semibold text-slate-700' : '' }} dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 transition-colors"
+                                href="{{ route('permohonan.index') }}"> {{-- UBAH DI SINI --}}
                                 <div
                                     class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                                     <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-archive-2"></i>
@@ -91,11 +90,11 @@
 
                     {{-- Menu Complete (tampil untuk semua role yang login) --}}
                     <li class="mt-0.5 w-full">
-                        {{-- Ganti 'complete.*' dengan nama rute Anda nanti --}}
-                        <a class="py-2.7 {{-- request()->routeIs('complete.*') ? 'bg-blue-500/13 font-semibold text-slate-700' : '' --}} dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 transition-colors"
-                            href="#">
+                        {{-- Hapus komentar dan perbarui href --}}
+                        <a class="py-2.7 {{ request()->routeIs('complete.index') ? 'bg-blue-500/13 font-semibold text-slate-700' : '' }} dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 transition-colors"
+                            href="{{ route('complete.index') }}">
                             <div
-                                class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                                class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl-p-2.5">
                                 <i class="relative top-0 text-sm leading-normal text-emerald-500 ni ni-check-bold"></i>
                             </div>
                             <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Complete</span>
@@ -108,7 +107,7 @@
                     <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">Account
                         pages</h6>
                 </li>
-                <li class="mt-0.5 w-full">
+                {{-- <li class="mt-0.5 w-full">
                     <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
                         href="#">
                         <div
@@ -117,7 +116,7 @@
                         </div>
                         <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Profile</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="mt-0.5 w-full">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
@@ -178,8 +177,7 @@
                                 sidenav-trigger>
                                 <div class="w-4.5 overflow-hidden">
                                     <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"></i>
-                                    <i
-                                        class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"></i>
+                                    <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"></i>
                                     <i class="ease relative block h-0.5 rounded-sm bg-white transition-all"></i>
                                 </div>
                             </a>

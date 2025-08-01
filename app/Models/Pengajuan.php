@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Pengajuan extends Model
 {
@@ -32,4 +33,9 @@ class Pengajuan extends Model
         'jam_masuk' => 'datetime',
         'jam_deploy' => 'datetime',
     ];
+
+    public function permohonan(): HasOne
+    {
+        return $this->hasOne(Permohonan::class);
+    }
 }
